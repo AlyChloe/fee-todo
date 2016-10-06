@@ -1,4 +1,45 @@
 body {
     background-color: $backgroundColor;
     font-family: $primaryFont;
+
+    header {
+
+      h1 {
+        text-align: center;
+        font-size: 100px;
+        color: #ead8d8;
+        font-weight: 100;
+        margin: 30px 0;
+      }
+    }
+
+    main {
+      background: #fff;
+      width: 700px;
+      margin: 0 auto;
+      border: #ddd solid 1px;
+      box-shadow: 1px 2px 30px #ddd;
+
+      form {
+        border-bottom: #ededed solid 1px;
+
+        input {
+          width: 100%;
+          padding: 15px 15px 15px 50px;
+          font-size: 25px;
+          border: transparent;
+          outline: none;
+          color: #4d4d4d;
+          font-style: italic;
+          font-weight: 300;
+
+          &::-webkit-input-placeholder {
+             color: #e6e6e6;
+          }
+        }
+
+
+      }
+
+    }
 }

@@ -1,0 +1,63 @@
+#items {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+    overflow: hidden;
+    padding: 16px;
+    border-bottom: #e6e6e6 solid 1px;
+
+    article {
+      position: relative;
+
+      .check {
+        float: left;
+        background: white;
+        border-radius: 50%;
+        padding: 3px 3px;
+        border: #e6e6e6 solid 1px;
+        margin-top: 7px;
+
+        .fa {
+          visibility: hidden;
+          font-size: 27px;
+          color: #5dc2af;
+        }
+      }
+
+      p {
+        float: left;
+        padding-left: 25px;
+        font-size: 25px;
+        margin: 8px 0;
+        font-weight: 300;
+      }
+
+      .edit-todo {
+        display: none;
+        float: left;
+        width: 635px;
+        margin-left: 5px;
+        position: absolute;
+        font-size: 25px;
+        font-weight: 300;
+        top: -16px;
+        bottom: -58px;
+        right: -16px;
+        border: #777777 solid 2px;
+        padding-left: 10px;
+      }
+
+      .delete {
+        float: right;
+        background: white;
+        border: transparent;
+        font-size: 30px;
+        font-weight: 200;
+        color: #b16063;
+        margin-top: 3px;
+      }
+    }
+  }
+}
