@@ -277,7 +277,8 @@ html [type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
-  /* 2 */ }
+  /* 2 */
+  outline: none; }
 
 /**
  * Remove the inner border and padding in Firefox.
@@ -408,7 +409,8 @@ body {
         border-radius: 50%;
         padding: 3px 3px;
         border: #e6e6e6 solid 1px;
-        margin-top: 7px; }
+        margin-top: 7px;
+        outline: none; }
         #items li article .check .fa {
           visibility: hidden;
           font-size: 27px;

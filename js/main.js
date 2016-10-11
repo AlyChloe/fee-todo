@@ -1,4 +1,4 @@
-var remaining = 0;
+
 
 function toDoList() {
   this.createListItem = function(searchValue) {
@@ -13,23 +13,14 @@ function toDoList() {
       value: 'learn html'
     }).appendTo(article);
     var deleteButton = $('<button>').attr('class', 'delete').text('x').appendTo(article);
-
-    // Toggle edit box
-    $(window).click(function() {
-      $('article p').show().val(searchValue);
-      $('.edit-todo').hide();
-      $('.delete').show();
-    });
-
-    $('#items').on('click', 'p', function() {
-      event.stopPropagation();
-      $(this).hide();
-      $(this).siblings('.edit-todo').show().val(searchValue);
-      $('.delete').hide();
-    });
+    $(".edit-todo").attr('value', searchValue);
   };
 
+  var remaining = 0;
   $('form').submit(function(event) {
+    remaining++;
+    $('.incomplete-items').html(remaining);
+
     event.preventDefault();
     var searchValue = $('.new-todo').val();
     $('.new-todo').val('');
@@ -38,20 +29,57 @@ function toDoList() {
 
   // Delete item if user presses 'x'
   $('#items').on('click', '.delete', function() {
+    if($(this).parents('article').hasClass('pending')) {
+      remaining--;
+      $('.incomplete-items').html(remaining);
+    }
+
     $(this).parents('li').slideUp(function() {
       $(this).remove();
     });
-    $('.incomplete-items').html(remaining--);
+  });
+
+  // Toggle edit box
+  $('#items').on('click', 'p', function() {
+    var self = this;
+    $(this).hide();
+    $(this).siblings('.edit-todo').show();
+    $('.delete').hide();
+    $('.edit-todo').keyup(function(e) {
+      var value = this.value;
+      $(self).html(value);
+
+      if (e.keyCode == 13) {
+        $(self).show();
+        $(self).siblings('.edit-todo').hide();
+        $('.delete').show();
+      }
+    });
+  });
+
+  // Clear completed
+  $('footer').on('click', '.clear', function() {
+    $('.completed').slideUp(function() {
+      $(this).parent('li').remove();
+    });
   });
 
   // Check item if user presses 'check' button
   $('#items').on('click', '.check', function() {
-    $(this).parents('article').attr('class', 'completed');
-    $(this).children('.fa').toggle(function() {
-      $(this).css('visibility', 'visible');
-    });
-    $(this).siblings('p').css('textDecoration', 'line-through');
-    $('.incomplete-items').html(remaining--);
+    if($(this).parents('article').hasClass('completed') === true) {
+      $(this).parents('article').attr('class', 'pending');
+      $(this).children('.fa').css('visibility', 'hidden');
+      $(this).siblings('p').css('textDecoration', 'none');
+      remaining++;
+      $('.incomplete-items').html(remaining);
+    } else {
+      $(this).parents('article').attr('class', 'completed');
+      $(this).children('.fa').css('visibility', 'visible');
+      $(this).siblings('p').css('textDecoration', 'line-through');
+      remaining--;
+      $('.incomplete-items').html(remaining);
+    }
+
   });
 
   // Check completed items
@@ -77,8 +105,6 @@ function toDoList() {
     $('button.active').removeClass('active');
     $(this).addClass('active');
   });
-
-  // show remaining items
 
 }
 toDoList();
